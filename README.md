@@ -1,31 +1,37 @@
 # Enterprise CRM System
 
-This is a simple Customer Relationship Management (CRM) web application.
+A simple Customer Relationship Management (CRM) web application built using the MERN stack.  
+This system allows users to manage customer information including adding, editing, deleting, and searching customers.
+
+---
 
 ## Features
-- Add customers
+
+- Add new customers
 - Edit customer details
 - Delete customers
-- Search customers
-- Company information management
+- Search customers by name
+- Store company information
+- Simple and responsive UI
+
+---
 
 ## Technologies Used
+
+Frontend
 - React.js
-- Node.js
-- Express.js
-- MongoDB
+- HTML
+- CSS
 - Bootstrap
 
-## Installation
+Backend
+- Node.js
+- Express.js
 
-1. Clone the repository
-git clone https://github.com/redishettysanjana/crm-system.git
+Database
+- MongoDB
 
-2. Install dependencies
-npm install
+Version Control
+- Git & GitHub
 
-3. Run the backend
-node server.js
-
-4. Run the frontend
-npm start
+## Project Structure
