@@ -3,6 +3,8 @@ import axios from "axios";
 
 function App() {
 
+  const API = "https://crm-system-7ppz.onrender.com/customers";
+
   const [customers, setCustomers] = useState([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -11,9 +13,10 @@ function App() {
   const [editId, setEditId] = useState(null);
   const [search, setSearch] = useState("");
 
-  // Fetch customers
+
+  // FETCH CUSTOMERS
   const fetchCustomers = async () => {
-    const res = await axios.get("https://crm-system-7ppz.onrender.com");
+    const res = await axios.get(API);
     setCustomers(res.data);
   };
 
@@ -21,24 +24,28 @@ function App() {
     fetchCustomers();
   }, []);
 
-  // Add or Update customer
+
+  // ADD OR UPDATE CUSTOMER
   const addCustomer = async () => {
 
     if (editId) {
-      await axios.put(`https://crm-system-7ppz.onrender.com${editId}`, {
+      await axios.put(`${API}/${editId}`, {
         name,
         email,
         phone,
         company
       });
       setEditId(null);
+
     } else {
-      await axios.post("https://crm-system-7ppz.onrender.com", {
+
+      await axios.post(API, {
         name,
         email,
         phone,
         company
       });
+
     }
 
     setName("");
@@ -49,13 +56,15 @@ function App() {
     fetchCustomers();
   };
 
-  // Delete customer
+
+  // DELETE CUSTOMER
   const deleteCustomer = async (id) => {
-    await axios.delete(`https://crm-system-7ppz.onrender.com${id}`);
+    await axios.delete(`${API}/${id}`);
     fetchCustomers();
   };
 
-  // Edit customer
+
+  // EDIT CUSTOMER
   const editCustomer = (customer) => {
     setName(customer.name);
     setEmail(customer.email);
@@ -63,6 +72,7 @@ function App() {
     setCompany(customer.company);
     setEditId(customer._id);
   };
+
 
   return (
     <div className="container mt-4">
@@ -108,15 +118,19 @@ function App() {
         </div>
 
         <div className="col">
-          <button className="btn btn-primary" onClick={addCustomer}>
+          <button
+            className="btn btn-primary"
+            onClick={addCustomer}
+          >
             {editId ? "Update Customer" : "Add Customer"}
           </button>
         </div>
 
       </div>
 
+
       <h2>Customer List</h2>
-      
+
       <h4>Total Customers: {customers.length}</h4>
 
       <input
@@ -126,7 +140,9 @@ function App() {
         style={{ marginBottom: "10px" }}
       />
 
+
       <table className="table table-bordered table-striped">
+
         <thead>
           <tr>
             <th>Name</th>
@@ -138,7 +154,7 @@ function App() {
         </thead>
 
         <tbody>
-          {customers
+          {(customers || [])
             .filter((c) =>
               c.name.toLowerCase().includes(search.toLowerCase())
             )
@@ -148,10 +164,20 @@ function App() {
                 <td>{c.email}</td>
                 <td>{c.phone}</td>
                 <td>{c.company}</td>
-
                 <td>
-                  <button className="btn btn-warning btn-sm" onClick={() => editCustomer(c)}>Edit</button>
-                  <button className="btn btn-danger btn-sm ms-2" onClick={() => deleteCustomer(c._id)}>Delete</button>
+                  <button
+                    className="btn btn-warning btn-sm"
+                    onClick={() => editCustomer(c)}
+                  >
+                    Edit
+                  </button>
+
+                  <button
+                    className="btn btn-danger btn-sm ms-2"
+                    onClick={() => deleteCustomer(c._id)}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
