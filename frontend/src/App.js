@@ -12,6 +12,7 @@ function App() {
   const [company, setCompany] = useState("");
   const [editId, setEditId] = useState(null);
   const [search, setSearch] = useState("");
+  const [search, setSearch] = useState("");
 
 
   // FETCH CUSTOMERS
