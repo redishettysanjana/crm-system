@@ -13,7 +13,7 @@ function App() {
 
   // Fetch customers
   const fetchCustomers = async () => {
-    const res = await axios.get("http://localhost:5000/customers");
+    const res = await axios.get("https://crm-system-7ppz.onrender.com");
     setCustomers(res.data);
   };
 
@@ -25,7 +25,7 @@ function App() {
   const addCustomer = async () => {
 
     if (editId) {
-      await axios.put(`http://localhost:5000/customers/${editId}`, {
+      await axios.put(`https://crm-system-7ppz.onrender.com${editId}`, {
         name,
         email,
         phone,
@@ -33,7 +33,7 @@ function App() {
       });
       setEditId(null);
     } else {
-      await axios.post("http://localhost:5000/customers", {
+      await axios.post("https://crm-system-7ppz.onrender.com", {
         name,
         email,
         phone,
@@ -51,7 +51,7 @@ function App() {
 
   // Delete customer
   const deleteCustomer = async (id) => {
-    await axios.delete(`http://localhost:5000/customers/${id}`);
+    await axios.delete(`https://crm-system-7ppz.onrender.com${id}`);
     fetchCustomers();
   };
 
